@@ -45,9 +45,9 @@ V0 设计已冻结：正文最大宽度为 800px，后续以维护真实内容�
 
 ## 部署
 
-目标网站地址：https://agentic-compute-lab.github.io/
+网站地址：https://hefengcs.github.io/Agentic_Compute_Lab/
 
-原个人域名下的 Pages 发布已停用。独立站点等待创建 GitHub 组织 `agentic-compute-lab`，并将站点仓库迁移为 `agentic-compute-lab/agentic-compute-lab.github.io` 后启用。迁移时同步更新 `data/content.json` 中的 `site.github` 并重新构建。
+网站由独立仓库 `hefengcs/Agentic_Compute_Lab` 管理，以项目站点形式发布在个人域名下。
 
 使用 GitHub Pages 的分支部署：Settings → Pages → Source 选择 **Deploy from a branch**，分支为 `main`，目录为 `/docs`。无需自定义 Actions 工作流或额外的 workflow 写入权限。
 
