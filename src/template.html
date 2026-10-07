@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{name}}</title>
+  <meta name="description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{name}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:site_name" content="{{name}}">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header>
+      <h1>{{name}}</h1>
+      <p class="subtitle">{{subtitle}}</p>
+      <nav aria-label="Main navigation">
+        <a href="#research">Research</a>
+        <a href="#people">People</a>
+        {{#projects}}<a href="#projects">Projects</a>{{/projects}}
+        {{#publications}}<a href="#publications">Publications</a>{{/publications}}
+        <a href="#join">Join</a>
+        <a href="{{github}}">GitHub</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section aria-labelledby="about">
+        <h2 id="about">About</h2>
+        <p>{{about}}</p>
+      </section>
+      <section aria-labelledby="news">
+        <h2 id="news">News</h2>
+        <ul class="news-list plain-list">
+{{news}}
+        </ul>
+      </section>
+      <section aria-labelledby="research">
+        <h2 id="research">Research</h2>
+{{research}}
+      </section>
+      <section aria-labelledby="people">
+        <h2 id="people">People</h2>
+        <ul class="people-list plain-list">
+{{people}}
+        </ul>
+      </section>
+      {{#projects}}<section aria-labelledby="projects">
+        <h2 id="projects">Projects</h2>
+{{projects}}
+      </section>{{/projects}}
+      {{#publications}}<section aria-labelledby="publications">
+        <h2 id="publications">Publications &amp; Preprints</h2>
+{{publications}}
+      </section>{{/publications}}
+      <section aria-labelledby="join">
+        <h2 id="join">Join</h2>
+{{join}}
+      </section>
+    </main>
+    <footer>
+      <span>© {{copyrightYear}} {{name}}</span>
+      <a href="{{github}}">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>

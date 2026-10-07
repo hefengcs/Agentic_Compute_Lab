@@ -1,0 +1,50 @@
+{
+  "site": {
+    "name": "Agentic Compute Lab",
+    "subtitle": "Building scalable systems for research and reliable agents.",
+    "description": "An independent open research collective studying scalable research agents and reliable agentic systems.",
+    "github": "https://github.com/hefengcs/Agentic_Compute_Lab",
+    "copyrightYear": 2026
+  },
+  "about": "Agentic Compute Lab is an independent open research collective studying scalable research agents, reliable agentic systems, and the infrastructure required to make complex research more efficient, verifiable, and scalable. Our work focuses on how agents, environments, verification mechanisms, tools, and computational resources can be organized into reliable research systems.",
+  "news": [
+    {
+      "date": "2026-10",
+      "text": "Agentic Compute Lab was launched."
+    }
+  ],
+  "research": [
+    {
+      "title": "Scalable Research Agents",
+      "description": "We study how agents can support complex research workflows, from gathering evidence to running experiments. We are interested in how coordination and computational resources affect the quality and scale of this work."
+    },
+    {
+      "title": "Reliable Agent Evaluation",
+      "description": "We study how to evaluate agents across multi-step tasks, with attention to failure modes, reproducibility, and the reliability of evaluation signals."
+    },
+    {
+      "title": "Agent Harness and Environment Design",
+      "description": "We investigate how tools, interfaces, execution environments, and feedback shape agent behavior. Our focus is on making research workflows observable, reproducible, and easier to inspect."
+    },
+    {
+      "title": "Scalable Verification",
+      "description": "We study how to verify intermediate steps and research outputs as agent workflows grow in complexity, including how to allocate verification effort under limited computational resources."
+    }
+  ],
+  "people": [
+    {
+      "name": "Feng He",
+      "role": "Research Lead",
+      "url": "https://hefengcs.github.io/"
+    }
+  ],
+  "projects": [],
+  "publications": [],
+  "join": {
+    "paragraphs": [
+      "We welcome students and researchers interested in scalable research agents, reliable agent systems, and research infrastructure.",
+      "If you are interested in contributing, please include your background, research interests, and the problem you would like to work on."
+    ],
+    "email": null
+  }
+}

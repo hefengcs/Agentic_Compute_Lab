@@ -1,0 +1,12 @@
+{
+  "name": "agentic-compute-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && npm run preview",
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1 --directory docs"
+  },
+  "engines": { "node": ">=20" }
+}
