@@ -21,11 +21,19 @@ const resources = (item, projectLabel = 'Project') => {
     .map(([label, href]) => link(`[${label}]`, href));
   return links.length ? `<p class="resource-links">${links.join(' ')}</p>` : '';
 };
-const dateLabel = (date) => {
-  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(date)) throw new Error(`Use YYYY-MM for news dates: ${date}`);
-  return new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+const dateLabel = (date, month = 'short') => {
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(date)) throw new Error(`Use YYYY-MM for dates: ${date}`);
+  return new Intl.DateTimeFormat('en', { month, year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${date}-01T00:00:00Z`));
 };
+const posts = [...data.blog].sort((a, b) => b.date.localeCompare(a.date));
+const slugs = new Set();
+for (const post of posts) {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug) || slugs.has(post.slug)) {
+    throw new Error(`Expected a unique, lowercase hyphenated blog slug: ${post.slug}`);
+  }
+  slugs.add(post.slug);
+}
 
 const values = {
   ...Object.fromEntries(Object.entries(data.site).map(([key, value]) => [key, escape(value)])),
@@ -33,6 +41,9 @@ const values = {
   about: escape(data.about),
   news: [...data.news].sort((a, b) => b.date.localeCompare(a.date)).map((item) =>
     `<li><time datetime="${escape(item.date)}">${dateLabel(item.date)}</time><span>${item.url ? link(item.text, item.url) : escape(item.text)}</span></li>`
+  ).join('\n'),
+  blog: posts.map((post) =>
+    `<li class="entry blog-entry"><h3><a href="./blog/${post.slug}/">${escape(post.title)}</a></h3><p class="metadata">${escape(post.category)} | <time datetime="${escape(post.date)}">${dateLabel(post.date, 'long')}</time></p><p>${escape(post.description)}</p></li>`
   ).join('\n'),
   research: data.research.map((item) =>
     `<div class="research-direction"><h3>${escape(item.title)}</h3><p>${escape(item.description)}</p></div>`
@@ -50,16 +61,37 @@ const values = {
     (data.join.email ? `\n<p>Contact: <a href="mailto:${escape(data.join.email)}">${escape(data.join.email)}</a></p>` : '')
 };
 
-// Empty collections omit both the section and its navigation link.
-const html = template.replace(/\{\{#(projects|publications)\}\}([\s\S]*?)\{\{\/\1\}\}/g,
-  (_, key, content) => data[key].length ? content : ''
-).replace(/\{\{(\w+)\}\}/g, (_, key) => {
-  if (!(key in values)) throw new Error(`Unknown template field: ${key}`);
-  return values[key];
+const render = (source, fields) => source.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+  if (!(key in fields)) throw new Error(`Unknown template field: ${key}`);
+  return fields[key];
 }).replace(/[\t ]+$/gm, '');
+
+// Empty collections omit both the section and its navigation link.
+const html = render(template.replace(/\{\{#(blog|projects|publications)\}\}([\s\S]*?)\{\{\/\1\}\}/g,
+  (_, key, content) => data[key].length ? content : ''
+), values);
 const output = new URL('docs/', root);
 await mkdir(output, { recursive: true });
 await cp(new URL('assets/', root), new URL('assets/', output), { recursive: true });
 await writeFile(new URL('index.html', output), html);
 await writeFile(new URL('.nojekyll', output), '');
+if (posts.length) {
+  const postTemplate = await readFile(new URL('src/post.html', root), 'utf8');
+  for (const post of posts) {
+    const directory = new URL(`blog/${post.slug}/`, output);
+    const articleBody = await readFile(new URL(`src/posts/${post.slug}.html`, root), 'utf8');
+    const article = render(postTemplate, {
+      ...values,
+      articleTitle: escape(post.title),
+      articleDescription: escape(post.description),
+      articleCategory: escape(post.category),
+      articleDate: escape(post.date),
+      articleDateLabel: dateLabel(post.date, 'long'),
+      articleUrl: url(new URL(`blog/${post.slug}/`, data.site.url).href),
+      articleBody
+    });
+    await mkdir(directory, { recursive: true });
+    await writeFile(new URL('index.html', directory), article);
+  }
+}
 console.log(`Built static site: ${fileURLToPath(output)}`);

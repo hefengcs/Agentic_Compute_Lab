@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{articleTitle}} | {{name}}</title>
+  <meta name="description" content="{{articleDescription}}">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{articleTitle}}">
+  <meta property="og:description" content="{{articleDescription}}">
+  <meta property="og:site_name" content="{{name}}">
+  <meta property="og:url" content="{{articleUrl}}">
+  <link rel="canonical" href="{{articleUrl}}">
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header>
+      <a class="site-title" href="../../">{{name}}</a>
+      <nav aria-label="Main navigation">
+        <a href="../../#blog">Blog</a>
+        <a href="../../#research">Research</a>
+        <a href="../../#people">People</a>
+        <a href="../../#join">Join</a>
+        <a href="{{github}}">GitHub</a>
+      </nav>
+    </header>
+    <main id="main">
+      <article class="blog-post" aria-labelledby="article-title">
+        <header class="post-header">
+          <h1 id="article-title">{{articleTitle}}</h1>
+          <p class="post-meta"><em>{{articleCategory}} | <time datetime="{{articleDate}}">{{articleDateLabel}}</time></em></p>
+        </header>
+{{articleBody}}
+      </article>
+      <p class="back-link"><a href="../../#blog">← Back to Blog</a></p>
+    </main>
+    <footer>
+      <span>© {{copyrightYear}} {{name}}</span>
+      <a href="{{github}}">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>

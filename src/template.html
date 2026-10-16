@@ -18,6 +18,7 @@
       <h1>{{name}}</h1>
       <p class="subtitle">{{subtitle}}</p>
       <nav aria-label="Main navigation">
+        {{#blog}}<a href="#blog">Blog</a>{{/blog}}
         <a href="#research">Research</a>
         <a href="#people">People</a>
         {{#projects}}<a href="#projects">Projects</a>{{/projects}}
@@ -37,6 +38,12 @@
 {{news}}
         </ul>
       </section>
+      {{#blog}}<section aria-labelledby="blog">
+        <h2 id="blog">Blog</h2>
+        <ul class="plain-list">
+{{blog}}
+        </ul>
+      </section>{{/blog}}
       <section aria-labelledby="research">
         <h2 id="research">Research</h2>
 {{research}}

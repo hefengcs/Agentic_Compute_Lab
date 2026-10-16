@@ -3,6 +3,7 @@
     "name": "Agentic Compute Lab",
     "subtitle": "Building scalable systems for research and reliable agents.",
     "description": "An independent open research collective studying scalable research agents and reliable agentic systems.",
+    "url": "https://hefengcs.github.io/Agentic_Compute_Lab/",
     "github": "https://github.com/hefengcs/Agentic_Compute_Lab",
     "copyrightYear": 2026
   },
@@ -10,7 +11,21 @@
   "news": [
     {
       "date": "2026-10",
+      "text": "Our research agenda: Toward Self-Evolving Agent Harnesses.",
+      "url": "https://hefengcs.github.io/Agentic_Compute_Lab/blog/self-evolving-agent-harnesses/"
+    },
+    {
+      "date": "2026-10",
       "text": "Agentic Compute Lab was launched."
+    }
+  ],
+  "blog": [
+    {
+      "slug": "self-evolving-agent-harnesses",
+      "title": "Toward Self-Evolving Agent Harnesses",
+      "date": "2026-10",
+      "category": "Our Research Agenda",
+      "description": "Our research agenda for understanding how agent harnesses can learn from experience, improve their own execution mechanisms, and evolve at scale."
     }
   ],
   "research": [
