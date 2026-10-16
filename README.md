@@ -15,13 +15,13 @@ npm run preview
 
 ## 更新内容
 
-编辑 `data/content.json`，然后重新构建。数组顺序即显示顺序，News 和 Blog 例外，会按月份倒序排列。同月保留录入顺序。JSON 中的文案按纯文本处理；博客正文使用 HTML，见下文。
+编辑 `data/content.json`，然后重新构建。数组顺序即显示顺序，News 和 Blog 例外，会按记录日期倒序排列。相同日期保留录入顺序。JSON 中的文案按纯文本处理；博客正文使用 HTML，见下文。
 
 | 配置 | 字段 |
 | --- | --- |
 | `site` | 名称、副标题、SEO 简介、站点完整地址 `url`（以 `/` 结尾）、GitHub 地址、版权年份 |
 | `about` | 简介正文 |
-| `news` | `date`（YYYY-MM）、`text`；可选 `url` 将消息链接到论文或发布页 |
+| `news` | `date`（YYYY-MM 或 YYYY-MM-DD）、`text`；可选 `url` 将消息链接到论文或发布页 |
 | `blog` | `slug`（唯一的小写字母、数字和连字符）、`title`、`date`（YYYY-MM）、`category`、`description` |
 | `research` | `title`、`description` |
 | `people` | `name`、`role`；可选 `url` |
@@ -30,6 +30,8 @@ npm run preview
 | `join` | `paragraphs`（段落数组）、`email`（未确定时为 null） |
 
 新增 News 时只需在 `news` 中增加一条日期和消息记录。成员直接追加到 `people`，`role` 可使用 Research Intern、Research Contributor 或 Collaborator，不会生成空分类。论文的 `paper` 可以直接填写 arXiv URL；只显示填写的资源链接。项目与论文数组为空时，隐藏对应栏目和导航链接；添加第一条真实记录后，重新构建会自动显示。
+
+News 中有实际发布日期依据的事件精确到日；只有月份依据的记录保留月份，不为统一格式补写日期。页面按记录精度显示，例如 `2026-10-16` 显示为 `Oct 16, 2026`，`2026-10` 仍显示为 `Oct 2026`。
 
 新增博客时，在 `blog` 中添加文章信息，并将正文写入 `src/posts/<slug>.html`（仅正文 HTML，不包含整个页面）。构建会使用 `src/post.html` 生成 `docs/blog/<slug>/index.html`，首页 Blog 自动显示链接；`blog` 为空时隐藏栏目和导航。需要在 News 中宣传时，再添加一条带文章完整 URL 的记录。文章保留独立标题、简介、canonical URL 和 Open Graph metadata，使用与首页相同的本地字体和样式。
 

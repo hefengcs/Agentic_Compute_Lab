@@ -90,5 +90,5 @@ footer {
   nav { gap: 8px 20px; margin-top: 20px; }
   header { margin-bottom: 32px; }
   section + section { margin-top: 30px; }
-  .news-list li { grid-template-columns: 76px 1fr; gap: 12px; }
+  .news-list li { grid-template-columns: 90px 1fr; gap: 12px; }
 }

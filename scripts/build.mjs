@@ -22,9 +22,17 @@ const resources = (item, projectLabel = 'Project') => {
   return links.length ? `<p class="resource-links">${links.join(' ')}</p>` : '';
 };
 const dateLabel = (date, month = 'short') => {
-  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(date)) throw new Error(`Use YYYY-MM for dates: ${date}`);
-  return new Intl.DateTimeFormat('en', { month, year: 'numeric', timeZone: 'UTC' })
-    .format(new Date(`${date}-01T00:00:00Z`));
+  if (!/^\d{4}-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?$/.test(date)) {
+    throw new Error(`Use YYYY-MM or YYYY-MM-DD for dates: ${date}`);
+  }
+  const hasDay = date.length === 10;
+  const value = new Date(`${hasDay ? date : `${date}-01`}T00:00:00Z`);
+  if (value.toISOString().slice(0, date.length) !== date) {
+    throw new Error(`Invalid calendar date: ${date}`);
+  }
+  return new Intl.DateTimeFormat('en', {
+    month, year: 'numeric', ...(hasDay ? { day: 'numeric' } : {}), timeZone: 'UTC'
+  }).format(value);
 };
 const posts = [...data.blog].sort((a, b) => b.date.localeCompare(a.date));
 const slugs = new Set();

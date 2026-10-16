@@ -10,7 +10,7 @@
   "about": "Agentic Compute Lab is an independent open research collective studying scalable research agents, reliable agentic systems, and the infrastructure required to make complex research more efficient, verifiable, and scalable. Our work focuses on how agents, environments, verification mechanisms, tools, and computational resources can be organized into reliable research systems.",
   "news": [
     {
-      "date": "2026-10",
+      "date": "2026-10-16",
       "text": "Our research agenda: Toward Self-Evolving Agent Harnesses.",
       "url": "https://hefengcs.github.io/Agentic_Compute_Lab/blog/self-evolving-agent-harnesses/"
     },
